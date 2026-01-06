@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Choreographing a World of Dynamic Objects">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Computer Vision, 3D Vision, 4D Vision, Inverse Graphics, Generative Model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Choreographing a World of Dynamic Objects
+  </title>
+
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+
+  <link rel="apple-touch-icon" sizes="57x57"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-180x180.png" />
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-196x196.png"
+    sizes="196x196" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-192x192.png"
+    sizes="192x192" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-128.png" sizes="128x128" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-16x16.png" sizes="16x16" />
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/select.js"></script>
+  <style>
+  .hero-cover-desktop {
+      background-color: #000000;
+      background-image: url("./static/videos/teaser.png");
+      background-size: cover;
+      color: #fff;
+  }
+  .hero-cover-touch {
+      background-color: #000000;
+      background-image: url("./static/videos/teaser-mobile.png");
+      background-size: cover;
+      color: #fff;
+  }
+
+
+  .column-my {
+    flex: 1;  /* Ensures both columns take up equal width */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .half {
+      flex: 1;               /* Each child takes half the height of the column */
+      display: flex;         /* Make it a flex container */
+      justify-content: center; /* Center horizontally */
+      align-items: center;     /* Center vertically */
+      text-align: center;    /* Align text within the element */
+  }
+
+
+  </style>
+</head>
+
+<script type="text/javascript">
+    var sc_project=12835460; 
+    var sc_invisible=1; 
+    var sc_security="d2e3b553"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="free hit counter"
+    href="https://statcounter.com/" target="_blank"><img class="statcounter"
+    src="https://c.statcounter.com/12835460/0/d2e3b553/1/" alt="free hit counter"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
+
+<section class="hero hero-cover-desktop is-link is-hidden-touch is-fullheight video" style="overflow: hidden; position:relative;">
+  <div class="hero-video is-hidden-touch"
+    style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
+    <video playsinline autoplay muted loop>
+      <source src="./static/videos/teaser-small.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video is-hidden-desktop is-inline-block-mobile"
+    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+    <video playsinline autoplay muted loop>
+      <source src="./static/videos/teaser-mobile-small.mp4" type="video/mp4">
+    </video>
+  </div> 
+  <div class="overlay">
+  </div>
+
+  <div class="hero-head is-hidden-touch">
+    <header class="navbar is-hidden-touch">
+      <div class="container is-size-5">
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item pl-4 pr-4" href="./static/files/chord.pdf">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="https://arxiv.org/abs/2601.xxxxx">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span> 
+            </a>
+            <!-- <a class="navbar-item  pl-4 pr-4" href="https://chen-geng.com/rose4d">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/github.png" alt="GitHub" />
+              </span>
+              <span>Code (Coming soon)</span> 
+            </a> -->
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!--  Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 7rem;">
+        Choreographing a World <br> of Dynamic Objects
+      </h1>
+      <!-- <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem;">
+        Temporal Object Intrinsics Generation
+      </h1> -->
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem;">
+        arXiv 2026
+      </h1>
+      <h1 class="is-2 is-size-4-mobile" style="font-size: 2rem; opacity: 100%;">
+        <a href="https://yanzhelyu.github.io/">Yanzhe Lyu<sup class="is-size-6-mobile">1*</sup></a>,
+        <a href="https://chen-geng.com">Chen Geng<sup class="is-size-6-mobile">1*</sup></a>, 
+        <a href="https://kdharmarajan.com/">Karthik Dharmarajan<sup class="is-size-6-mobile">1</sup></a>,
+        <br>
+        <a href="https://cs.stanford.edu/~yzzhang/">Yunzhi Zhang<sup class="is-size-6-mobile">1</sup></a>, 
+        <a href="https://hadizayer.github.io/">Hadi Alzayer<sup class="is-size-6-mobile">1,3</sup></a>,
+        <a href="https://elliottwu.com/">Shangzhe Wu<sup class="is-size-6-mobile">2</sup></a>, 
+        <a href="https://www.jiajunwu.com">Jiajun Wu<sup class="is-size-6-mobile">1</sup></a>
+      </h1>
+      <br>
+      <h1 class="is-3 is-size-5-mobile" style="font-size: 1.75rem; opacity: 100%;">
+        1. Stanford University, 
+        2. University of Cambridge,
+        3. University of Maryland
+      </h1>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot is-hidden-mobile jump-nav">
+    <nav class="tabs is-toggle is-toggle-rounded is-centered is-size-5 jump-tabs" aria-label="Jump to section">
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#app">Generated 4D Scenes</a></li>
+        <li><a href="#viewer">Interactive Viewer</a></li>
+        <li><a href="#robot">Robot Manipulation</a></li>
+        <li><a href="#comparisons">Comparisons</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section class="hero hero-cover-touch is-hidden-desktop is-link is-fullheight video" style="overflow: hidden; position:relative;">
+
+  <!-- <div class="hero-video is-hidden-desktop is-inline-block-mobile"
+    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+    <video playsinline autoplay muted loop>
+      <source src="/rose4d/static/videos/teaser-mobile-small.mp4" type="video/mp4">
+    </video>
+  </div>  -->
+
+  <div class="hero-video is-inline-block-mobile"
+  style="height: 172.28571428vw; width: 100%; min-width: 100%;min-height: 56.25vw;">
+  <video playsinline autoplay muted loop>
+    <source src="./static/videos/teaser-mobile-small.mp4" type="video/mp4">
+  </video>
+  </div>
+
+
+  <div class="overlay">
+  </div>
+
+  <!--  Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 7rem;">
+        Choreographing a World <br> of Dynamic Objects
+      </h1>
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem;">
+        arXiv 2025
+      </h1>
+      <h1 class="is-3 is-size-5-mobile" style="font-size: 2rem; opacity: 100%;">
+        <a href="https://yanzhelyu.github.io/">Yanzhe Lyu<sup class="is-size-6-mobile">1*</sup></a>,
+        <a href="https://chen-geng.com">Chen Geng<sup class="is-size-6-mobile">1*</sup></a>, 
+        <a href="https://kdharmarajan.com/">Karthik Dharmarajan<sup class="is-size-6-mobile">1</sup></a>,
+        <br>
+        <a href="https://cs.stanford.edu/~yzzhang/">Yunzhi Zhang<sup class="is-size-6-mobile">1</sup></a>, 
+        <a href="https://hadizayer.github.io/">Hadi AlZayer<sup class="is-size-6-mobile">1,3</sup></a>,
+        <a href="https://elliottwu.com/">Shangzhe Wu<sup class="is-size-6-mobile">2</sup></a>, 
+        <a href="https://www.jiajunwu.com">Jiajun Wu<sup class="is-size-6-mobile">1</sup></a>
+      </h1>
+    </div>
+  </div>
+
+  </div>
+
+</section>
+
+<section class="section is-medium" id="intro">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-justified">
+        <h2 class="subtitle">
+          Given any collection of <strong>static 3D objects without any dynamic structural annotations</strong>, we present <strong>CHORD</strong>, a universal pipeline to generate dynamic motion of these 3D objects to form dynamic 4D scenes.
+        </h2>
+        <br>
+      </div>
+    </div>
+    <!-- Video Carousel -->
+    <div class="intro-carousel-container">
+      <button class="carousel-nav carousel-nav--prev" id="intro-carousel-prev" aria-label="Previous">&#8249;</button>
+      <div class="intro-carousel" id="intro-carousel">
+        <div class="intro-carousel-track">
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline poster="./static/images/loading.svg">
+              <source src="./static/videos/settings/child_with_seesaw.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline poster="./static/images/loading.svg">
+              <source src="./static/videos/settings/dv_with_lamp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline poster="./static/images/loading.svg">
+              <source src="./static/videos/settings/ezio_with_eagle.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline poster="./static/images/loading.svg">
+              <source src="./static/videos/settings/robot_with_block.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline poster="./static/images/loading.svg">
+              <source src="./static/videos/settings/ca_with_dog.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline poster="./static/images/loading.svg">
+              <source src="./static/videos/settings/cat_with_cushion.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-nav carousel-nav--next" id="intro-carousel-next" aria-label="Next">&#8250;</button>
+    </div>
+    <div class="carousel-dots" id="intro-carousel-dots">
+      <span class="carousel-dot active" data-index="0"></span>
+      <span class="carousel-dot" data-index="1"></span>
+      <span class="carousel-dot" data-index="2"></span>
+      <span class="carousel-dot" data-index="3"></span>
+      <span class="carousel-dot" data-index="4"></span>
+      <span class="carousel-dot" data-index="5"></span>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section is-small" id="app">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-1 has-text-centered is-size-4-mobile">Gallery of Generated 4D Scenes</h2>
+        <div class="content">
+          <p>
+            Our pipeline do not rely on any category-specific prior or dynamic structural annotations, and therefore can be applied to generate 4D scenes of a wide range of interactions of dynamic objects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered is-size-4-mobile">A child launches a brick with a seesaw</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
+  <source src="./static/videos/noinput_videos/child_with_seesaw.mp4" type="video/mp4">
+</video>
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered is-size-4-mobile">Captain America petting a dog</h2>
+        <div class="content">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
+  <source src="./static/videos/noinput_videos/ca_with_dog.mp4" type="video/mp4">
+</video>
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered is-size-4-mobile">A cat jumps on a cusion.</h2>
+        <div class="content">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
+  <source src="./static/videos/noinput_videos/cat_with_cushion.mp4" type="video/mp4">
+</video>
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered is-size-4-mobile">Darth Vader pushes a desk lamp downwards.</h2>
+        <div class="content">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
+  <source src="./static/videos/noinput_videos/dv_with_lamp.mp4" type="video/mp4">
+</video>
+
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered is-size-4-mobile">Ezio is playing with his eagle.</h2>
+        <div class="content">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
+  <source src="./static/videos/noinput_videos/ezio_with_eagle.mp4" type="video/mp4">
+</video>
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-desktop is-centered">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3 has-text-centered is-size-4-mobile">Select 4D Scenes:</h2> -->
+        <h2 class="title is-2 has-text-centered is-size-4-mobile">More Generated 4D Scenes</h2>
+      </div>
+    </div>
+    <div id="toi-buttons" class="comparison-scene-buttons">
+      <button class="button is-light comparison-scene-button is-primary" onclick="Change_TOI_scene(0)">Basketball and net</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(1)">Dominoes falling</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(2)">Two people raising a box</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(3)">A person opens a headphone</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(4)">A person opens a microwave</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(5)">Two people hugging each other</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(6)">A sealion playing with a ball</button>
+      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(7)">A brick falls on a trampoline</button>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-centered is-four-quarters has-text-justified">
+        <div class="columns is-centered">
+          <div class="column is-four-quarters has-text-justified">
+            <video autoplay muted loop playsinline width="100%" id="toi-video" src="./static/videos/more/ball_with_net.mp4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section viser-section" id="viewer">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+      <h2 class="title is-3">Interactive Viewer</h2>
+    </div>
+    <div class="comparison-scene-buttons" id="three-scene-buttons">
+      <button class="button is-light comparison-scene-button is-primary" data-three-scene="laptop">Man & Scanned Laptop</button>
+      <button class="button is-light comparison-scene-button" data-three-scene="robot">Robot & Brick</button>
+      <button class="button is-light comparison-scene-button" data-three-scene="cat">Cat & Cushion</button>
+      <button class="button is-light comparison-scene-button" data-three-scene="sealion">Sealion & Ball</button>
+      <button class="button is-light comparison-scene-button" data-three-scene="ball">Ball & Rim</button>
+    </div>
+    <p class="comparison-scene-prompt" id="three-scene-prompt">Text prompt: "A man closing the lid of a laptop."</p>
+    <div class="three-viewer" id="three-viewer">
+      <div class="three-viewer__loading" id="three-loading">Loading viewer…</div>
+    </div>
+    <div class="viewer-illustration">
+      <span class="viewer-illustration__label">Interactive tips:</span>
+      <span class="viewer-illustration__tip">Orbit — Left click & drag</span>
+      <span class="viewer-illustration__divider">|</span>
+      <span class="viewer-illustration__tip">Pan — Right click or Shift + drag</span>
+      <span class="viewer-illustration__divider">|</span>
+      <span class="viewer-illustration__tip">Zoom — Mouse wheel or pinch</span>
+    </div>
+  </div>
+</section>
+
+<section class="section robot-manipulation-section" id="robot">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered results-title">
+      <h2 class="title is-3">Robot Manipulation</h2>
+      <p class="comparison-subtitle">Select Scene:</p>
+      <div class="comparison-scene-buttons" id="robot-scene-buttons"></div>
+      <p class="comparison-scene-prompt" id="robot-scene-prompt"></p>
+    </div>
+    <div class="robot-video-wrapper">
+      <video id="robot-video" autoplay controls muted loop playsinline height="100%">
+        <source src="./static/videos/robot_demo/fabric.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Comparisons -->
+<div class="comparison-section" id="comparisons">
+  <div class="content has-text-centered">
+    <h2 class="title is-3">Comparisons</h2>
+  </div>
+  <div class="comparison-category">
+    <h3 class="title is-4 has-text-centered">Multi-object</h3>
+    <p class="comparison-subtitle has-text-centered">Select Scene:</p>
+    <div class="comparison-scene-buttons" id="comparison-scene-buttons-multi">
+    </div>
+    <p class="comparison-scene-prompt" id="comparison-scene-prompt-multi"></p>
+    <div class="comparison-grid-wrapper">
+      <div class="comparison-grid" id="comparison-grid-multi"></div>
+    </div>
+  </div>
+  <div class="comparison-category">
+    <h3 class="title is-4 has-text-centered">Single-object</h3>
+    <p class="comparison-subtitle has-text-centered">Select Scene:</p>
+    <div class="comparison-scene-buttons" id="comparison-scene-buttons-single">
+    </div>
+    <p class="comparison-scene-prompt" id="comparison-scene-prompt-single"></p>
+    <div class="comparison-grid-wrapper">
+      <div class="comparison-grid" id="comparison-grid-single"></div>
+    </div>
+  </div>
+</div>
+<!--/ Comparisons -->
+
+
+
+<section class="section is-hidden-touch" id="bibtex">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <h3 class="title">Bibtex</h3>
+    </div>
+    <div class="columns is-centered">
+      <div class="content" style="margin-top: 10pt;">
+        <pre class="is-hidden-mobile"><code>@misc{lyu2026chord,
+          title={Choreographing a World of Dynamic Objects}, 
+          author={Yanzhe Lyu and Chen Geng and Karthik Dharmarajan and Yunzhi Zhang and Hadi AlZayer and Shangzhe Wu and Jiajun Wu},
+          year={2026},
+          eprint={2601.xxxxx},
+          archivePrefix={arXiv},
+          primaryClass={cs.CV},
+          url={https://arxiv.org/abs/2601.xxxxx}, 
+    }</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <h3 class="title">Acknowledgements</h3>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a>, <a
+              href="https://www.cs.columbia.edu/~huy/scalingup/">Scaling Up Distilling Down</a>, <a
+              href="https://umi-on-legs.github.io/">UMI on Legs</a>, and <a href="https://chen-geng.com/rose4d">Birth and Death of a Rose</a>.
+          </p>
+          <p>
+            This website is licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow and modify the <a
+              href="https://github.com/nerfies/nerfies.github.io">source
+              code</a> of this website as long as
+            you link back to the <a href="https://nerfies.github.io/">NeRFies</a> page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="./static/js/three-viewer.bundle.js"></script>
+</body>
+
+</html>
