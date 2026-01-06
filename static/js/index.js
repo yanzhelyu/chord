@@ -93,6 +93,52 @@ function initIntroCarousel() {
   
   var currentIndex = 0;
   var totalSlides = slides.length;
+
+  function ensureVideoSource(video) {
+    var source = video.querySelector('source');
+    if (!source) return;
+    var dataSrc = source.getAttribute('data-src');
+    if (dataSrc && !source.getAttribute('src')) {
+      source.setAttribute('src', dataSrc);
+      video.load();
+    }
+  }
+
+  function clearVideoSource(video) {
+    var source = video.querySelector('source');
+    if (!source) return;
+    if (source.getAttribute('src')) {
+      source.removeAttribute('src');
+      video.load();
+    }
+  }
+
+  function activateSlideVideo(slide) {
+    var video = slide.querySelector('video');
+    if (!video) return;
+    ensureVideoSource(video);
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function() {});
+    }
+  }
+
+  function deactivateSlideVideo(slide) {
+    var video = slide.querySelector('video');
+    if (!video) return;
+    video.pause();
+    clearVideoSource(video);
+  }
+
+  function syncVideoPlayback() {
+    slides.forEach(function(slide, i) {
+      if (i === currentIndex) {
+        activateSlideVideo(slide);
+      } else {
+        deactivateSlideVideo(slide);
+      }
+    });
+  }
   
   function updateSlideClasses() {
     slides.forEach(function(slide, i) {
@@ -114,6 +160,7 @@ function initIntroCarousel() {
     currentIndex = index;
     
     updateSlideClasses();
+    syncVideoPlayback();
     
     // Update dots
     dots.forEach(function(dot, i) {
@@ -346,4 +393,3 @@ function initComparisonSection(config) {
     });
   }
 }
-
