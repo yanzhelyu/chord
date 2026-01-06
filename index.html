@@ -10,6 +10,8 @@
   <title>
     Choreographing a World of Dynamic Objects
   </title>
+  <link rel="preload" as="video" href="./static/videos/teaser-small.mp4" type="video/mp4" media="(min-width: 1024px)">
+  <link rel="preload" as="video" href="./static/videos/teaser-mobile-small.mp4" type="video/mp4" media="(max-width: 1023px)">
 
   <meta name="msapplication-TileColor" content="#FFFFFF" />
 
@@ -101,13 +103,13 @@
 <section class="hero hero-cover-desktop is-link is-hidden-touch is-fullheight video" style="overflow: hidden; position:relative;">
   <div class="hero-video is-hidden-touch"
     style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
-    <video playsinline autoplay muted loop>
+    <video playsinline autoplay muted loop preload="auto">
       <source src="./static/videos/teaser-small.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-video is-hidden-desktop is-inline-block-mobile"
     style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
-    <video playsinline autoplay muted loop>
+    <video playsinline autoplay muted loop preload="auto">
       <source src="./static/videos/teaser-mobile-small.mp4" type="video/mp4">
     </video>
   </div> 
@@ -201,7 +203,7 @@
 
   <div class="hero-video is-inline-block-mobile"
   style="height: 172.28571428vw; width: 100%; min-width: 100%;min-height: 56.25vw;">
-  <video playsinline autoplay muted loop>
+  <video playsinline autoplay muted loop preload="auto">
     <source src="./static/videos/teaser-mobile-small.mp4" type="video/mp4">
   </video>
   </div>
@@ -329,8 +331,8 @@
   </div>
 </section>
 
-<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
-  <source src="./static/videos/noinput_videos/child_with_seesaw.mp4" type="video/mp4">
+<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true" poster="./static/images/loading.svg">
+  <source data-src="./static/videos/noinput_videos/child_with_seesaw.mp4" type="video/mp4">
 </video>
 
 <section class="section is-small" id="rose">
@@ -347,8 +349,8 @@
   </div>
 </section>
 
-<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
-  <source src="./static/videos/noinput_videos/ca_with_dog.mp4" type="video/mp4">
+<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true" poster="./static/images/loading.svg">
+  <source data-src="./static/videos/noinput_videos/ca_with_dog.mp4" type="video/mp4">
 </video>
 
 <section class="section is-small" id="rose">
@@ -365,8 +367,8 @@
   </div>
 </section>
 
-<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
-  <source src="./static/videos/noinput_videos/cat_with_cushion.mp4" type="video/mp4">
+<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true" poster="./static/images/loading.svg">
+  <source data-src="./static/videos/noinput_videos/cat_with_cushion.mp4" type="video/mp4">
 </video>
 
 <section class="section is-small" id="rose">
@@ -384,8 +386,8 @@
 </section>
 
 
-<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
-  <source src="./static/videos/noinput_videos/dv_with_lamp.mp4" type="video/mp4">
+<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true" poster="./static/images/loading.svg">
+  <source data-src="./static/videos/noinput_videos/dv_with_lamp.mp4" type="video/mp4">
 </video>
 
 
@@ -403,8 +405,8 @@
   </div>
 </section>
 
-<video class="scroll-scale-video" autoplay muted loop playsinline poster="./static/images/loading.svg">
-  <source src="./static/videos/noinput_videos/ezio_with_eagle.mp4" type="video/mp4">
+<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true" poster="./static/images/loading.svg">
+  <source data-src="./static/videos/noinput_videos/ezio_with_eagle.mp4" type="video/mp4">
 </video>
 
 <section class="section is-small" id="rose">
@@ -429,7 +431,7 @@
       <div class="column is-centered is-four-quarters has-text-justified">
         <div class="columns is-centered">
           <div class="column is-four-quarters has-text-justified">
-            <video autoplay muted loop playsinline width="100%" id="toi-video" src="./static/videos/more/ball_with_net.mp4">
+            <video autoplay muted loop playsinline width="100%" id="toi-video" data-src="./static/videos/more/ball_with_net.mp4" preload="none" data-lazy="true">
           </div>
         </div>
       </div>
@@ -474,8 +476,8 @@
       <p class="comparison-scene-prompt" id="robot-scene-prompt"></p>
     </div>
     <div class="robot-video-wrapper">
-      <video id="robot-video" autoplay controls muted loop playsinline height="100%">
-        <source src="./static/videos/robot_demo/fabric.mp4" type="video/mp4">
+      <video id="robot-video" autoplay controls muted loop playsinline height="100%" preload="none" poster="./static/images/loading.svg">
+        <source data-src="./static/videos/robot_demo/fabric.mp4" type="video/mp4">
       </video>
     </div>
   </div>

@@ -67,19 +67,17 @@ var views = [
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Initialize Robot Manipulation section
-  initRobotSection();
-  
-  // Initialize Comparison sections
-  comparisonConfigs.forEach(function(config) {
-    initComparisonSection(config);
-  });
-  
   // Initialize scroll-based video scaling
   initScrollScaleVideos();
   
   // Initialize intro video carousel
   initIntroCarousel();
+
+  // Lazy-load non-hero videos
+  initLazyVideos();
+
+  // Defer heavy sections until they are near the viewport
+  initDeferredSections();
 });
 
 function initIntroCarousel() {
@@ -199,6 +197,98 @@ function initIntroCarousel() {
     });
   });
   
+}
+
+function initLazyVideos() {
+  var lazyVideos = document.querySelectorAll('video[data-lazy="true"]');
+  if (!lazyVideos.length) return;
+
+  function loadVideo(video) {
+    var source = video.querySelector('source');
+    if (source) {
+      var dataSrc = source.getAttribute('data-src');
+      if (dataSrc && !source.getAttribute('src')) {
+        source.setAttribute('src', dataSrc);
+      }
+    } else {
+      var dataSrc = video.getAttribute('data-src');
+      if (dataSrc && !video.getAttribute('src')) {
+        video.setAttribute('src', dataSrc);
+      }
+    }
+    video.load();
+    if (video.autoplay) {
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function() {});
+      }
+    }
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    lazyVideos.forEach(loadVideo);
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries, obs) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      loadVideo(entry.target);
+      obs.unobserve(entry.target);
+    });
+  }, { rootMargin: "200px 0px", threshold: 0.01 });
+
+  lazyVideos.forEach(function(video) {
+    observer.observe(video);
+  });
+}
+
+function initDeferredSections() {
+  var robotSection = document.getElementById("robot");
+  var comparisonsSection = document.getElementById("comparisons");
+  var robotInitialized = false;
+  var comparisonsInitialized = false;
+
+  function startRobot() {
+    if (robotInitialized) return;
+    robotInitialized = true;
+    initRobotSection();
+  }
+
+  function startComparisons() {
+    if (comparisonsInitialized) return;
+    comparisonsInitialized = true;
+    comparisonConfigs.forEach(function(config) {
+      initComparisonSection(config);
+    });
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    startRobot();
+    startComparisons();
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries, obs) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      if (entry.target === robotSection) {
+        startRobot();
+        obs.unobserve(entry.target);
+      }
+      if (entry.target === comparisonsSection) {
+        startComparisons();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: "200px 0px", threshold: 0.01 });
+
+  if (robotSection) {
+    observer.observe(robotSection);
+  }
+  if (comparisonsSection) {
+    observer.observe(comparisonsSection);
+  }
 }
 
 function initScrollScaleVideos() {
