@@ -107,6 +107,17 @@ h1, h2, h3, h4, h5, h6 {
   /*color: #4286f4;*/
 }
 
+.affiliation-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.affiliation-item {
+  white-space: nowrap;
+}
+
 .publication-video {
     position: relative;
     width: 100%;
